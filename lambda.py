@@ -46,4 +46,21 @@ def lambda_handler(event, context):
         if c[i][0] == 1:
             d[0] = d[0].replace(d[0], c[i][1], 1)
         d[c[i][0] - 1] = d[c[i][0] - 1].replace(d[c[i][0] -1 ], c[i][1])
-    return d
+    c = []
+    d = ['Проверка 1', 'Проверка 2', 'Проверка 3', 'Проверка 1', 'Проверка 3', 'Проверка 2', '!Hello world!', 'New day', 'Hello world!']
+    for i in range(len(d)):
+        k = []
+        if i == 0:
+            for j in range(3):
+                k.append(d[j])
+        elif i == len(d) - 1:
+            for j in range(2):
+                k.append(d[-2+j])
+            k.append(d[0])
+        else:
+            k.append(d[i-1])
+            k.append(d[i])
+            k.append(d[i+1])
+        c.append(k)
+    print(d)
+    return c

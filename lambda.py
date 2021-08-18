@@ -62,4 +62,4 @@ def lambda_handler(event, context):
             k.append(d[i])
             k.append(d[i+1])
         c.append(k)
-    return c
+    return str(c)

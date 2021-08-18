@@ -1,8 +1,6 @@
 import requests
 
 def lambda_handler(event, context):
-    AIRTABLE_BASE_ID = "shrp5Xhe3bkzWkkhz"
-    AIRTABLE_TABLE_NAME = "tblX1jGmYZoqyHrlE"
     endpoint = "https://api.airtable.com/v0/appS2PargbyUuC55c/MainTable"
     
     headers = {
@@ -40,15 +38,14 @@ def lambda_handler(event, context):
     }
     r = requests.get(endpoint, json=data, headers=headers)
     res = r.json()
-    c = [(res['records'][i]['fields']['ID'], res['records'][i]['fields']['title']) for i in range(len(res['records']))]
-    d = [c[i][1] for i in range(len(c))]
-    for i in range(len(c)):
+    c = [(res['records'][i]['fields']['ID'], res['records'][i]['fields']['title']) for i in range(len(res['records']))] #collect title and ID fields 
+    d = [c[i][1] for i in range(len(c))] # array of titles
+    for i in range(len(c)): # list of title values ordered by Id column
         if c[i][0] == 1:
             d[0] = d[0].replace(d[0], c[i][1], 1)
         d[c[i][0] - 1] = d[c[i][0] - 1].replace(d[c[i][0] -1 ], c[i][1])
     c = []
-    d = ['Проверка 1', 'Проверка 2', 'Проверка 3', 'Проверка 1', 'Проверка 3', 'Проверка 2', '!Hello world!', 'New day', 'Hello world!']
-    for i in range(len(d)):
+    for i in range(len(d)): # algorithm creates list of 3 elements form title field, and adds that list to "c"
         k = []
         if i == 0:
             for j in range(3):
